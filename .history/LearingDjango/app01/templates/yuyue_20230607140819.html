@@ -1,0 +1,246 @@
+{% load static %}
+<html lang="en">
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>课表</title>
+    {% load static %}
+</head>
+<style>
+    body{
+        background: url("{% static '../static/img/beijing.webp' %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        opacity: ;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    table {
+        margin: 50px auto;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #ccc;
+        font-weight: bold;
+        padding: 20px;
+    }
+
+    td {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .course {
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    .course:hover {
+        background-color: #f7f7f7;
+    }
+
+    /* 轮播图 */
+    .slideshow-container {
+        position: relative;
+        margin: auto;
+        height: 400px;
+        width: 800px;
+    }
+
+    .mySlides {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .prev,
+    .next {
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        cursor: pointer;
+    }
+
+    .prev {
+        left: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    /* 背景图 */
+
+</style>
+
+<body>
+    {% load static %}
+    <!-- 背景图 -->
+
+    <h1>预约时间</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>时间</th>
+                <th>星期一</th>
+                <th>星期二</th>
+                <th>星期三</th>
+                <th>星期四</th>
+                <th>星期五</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>8:00-9:00</td>
+                <td class="course" id="monday1">英语</td>
+                <td class="course" id="tuesday1">数学</td>
+                <td class="course" id="wednesday1">语文</td>
+                <td class="course" id="thursday1">物理</td>
+                <td class="course" id="friday1">化学</td>
+            </tr>
+            <tr>
+                <td>9:00-10:00</td>
+                <td class="course" id="monday2">数学</td>
+                <td class="course" id="tuesday2">英语</td>
+                <td class="course" id="wednesday2">物理</td>
+                <td class="course" id="thursday2">化学</td>
+                <td class="course" id="friday2">语文</td>
+            </tr>
+            <tr>
+                <td>10:00-11:00</td>
+                <td class="course" id="monday3">语文</td>
+                <td class="course" id="tuesday3">物理</td>
+                <td class="course" id="wednesday3">化学</td>
+                <td class="course" id="thursday3">数学</td>
+                <td class="course" id="friday3">英语</td>
+            </tr>
+            <tr>
+                <td>11:00-12:00</td>
+                <td class="course" id="monday4">物理</td>
+                <td class="course" id="tuesday4">化学</td>
+                <td class="course" id="wednesday4">数学</td>
+                <td class="course" id="thursday4">英语</td>
+                <td class="course" id="friday4">语文</td>
+            </tr>
+            <tr>
+                <td>13:00-14:00</td>
+                <td class="course" id="monday5">化学</td>
+                <td class="course" id="tuesday5">语文</td>
+                <td class="course" id="wednesday5">英语</td>
+                <td class="course" id="thursday5">语文</td>
+                <td class="course" id="friday5">数学</td>
+            </tr>
+            <tr>
+                <td>14:00-15:00</td>
+                <td class="course" id="monday6">英语</td>
+                <td class="course" id="tuesday6">化学</td>
+                <td class="course" id="wednesday6">溜了溜了</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="{% static '../static/img/健身.jpg' %}" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static '../static/img/游泳.webp' %}" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static '../static/img/羽毛球.webp' %}" style="width:100%">
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+
+</body>
+<script>
+    // 获取所有课程格子
+    var courses = document.querySelectorAll('.course');
+
+    // 遍历课程格子并添加点击事件
+    courses.forEach(function (course) {
+        course.addEventListener('click', function () {
+            var courseName = this.innerHTML;
+            alert('你点击了课程：' + courseName);
+        });
+    });
+
+    //轮播图
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+    }
+
+    var prevBtn = document.querySelector('.prev');
+    var nextBtn = document.querySelector('.next');
+
+    prevBtn.addEventListener('click', function () {
+        plusSlides(-1);
+    });
+
+    nextBtn.addEventListener('click', function () {
+        plusSlides(1);
+    });
+
+
+</script>

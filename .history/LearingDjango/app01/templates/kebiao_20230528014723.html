@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>课表</title>
+</head>
+<style>
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    table {
+        margin: 50px auto;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #ccc;
+        font-weight: bold;
+        padding: 30px;
+    }
+
+    td {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .course {
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    .course:hover {
+        background-color: #f7f7f7;
+    }
+</style>
+
+<body>
+    <h1>预约时间</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>时间</th>
+                <th>星期一</th>
+                <th>星期二</th>
+                <th>星期三</th>
+                <th>星期四</th>
+                <th>星期五</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>8:00-9:00</td>
+                <td class="course" id="monday1">英语</td>
+                <td class="course" id="tuesday1">数学</td>
+                <td class="course" id="wednesday1">语文</td>
+                <td class="course" id="thursday1">物理</td>
+                <td class="course" id="friday1">化学</td>
+            </tr>
+            <tr>
+                <td>9:00-10:00</td>
+                <td class="course" id="monday2">数学</td>
+                <td class="course" id="tuesday2">英语</td>
+                <td class="course" id="wednesday2">物理</td>
+                <td class="course" id="thursday2">化学</td>
+                <td class="course" id="friday2">语文</td>
+            </tr>
+            <tr>
+                <td>10:00-11:00</td>
+                <td class="course" id="monday3">语文</td>
+                <td class="course" id="tuesday3">物理</td>
+                <td class="course" id="wednesday3">化学</td>
+                <td class="course" id="thursday3">数学</td>
+                <td class="course" id="friday3">英语</td>
+            </tr>
+            <tr>
+                <td>11:00-12:00</td>
+                <td class="course" id="monday4">物理</td>
+                <td class="course" id="tuesday4">化学</td>
+                <td class="course" id="wednesday4">数学</td>
+                <td class="course" id="thursday4">英语</td>
+                <td class="course" id="friday4">语文</td>
+            </tr>
+            <tr>
+                <td>13:00-14:00</td>
+                <td class="course" id="monday5">化学</td>
+                <td class="course" id="tuesday5">语文</td>
+                <td class="course" id="wednesday5">英语</td>
+                <td class="course" id="thursday5">语文</td>
+                <td class="course" id="friday5">数学</td>
+            </tr>
+            <tr>
+                <td>14:00-15:00</td>
+                <td class="course" id="monday6">英语</td>
+                <td class="course" id="tuesday6">化学</td>
+                <td class="course" id="wednesday6">溜了溜了</td>
+                
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <img src="image1.jpg" style="width:100%">
+                    </div>
+
+                    <div class="mySlides fade">
+                        <img src="image2.jpg" style="width:100%">
+                    </div>
+
+                    <div class="mySlides fade">
+                        <img src="image3.jpg" style="width:100%">
+                    </div>
+
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+
+</body>
+<script>
+    // 获取所有课程格子
+    var courses = document.querySelectorAll('.course');
+
+    // 遍历课程格子并添加点击事件
+    courses.forEach(function (course) {
+        course.addEventListener('click', function () {
+            var courseName = this.innerHTML;
+            alert('你点击了课程：' + courseName);
+        });
+    });
+</script>

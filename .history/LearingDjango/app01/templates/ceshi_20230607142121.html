@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图示例</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .slider {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slider img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider .prev,
+        .slider .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .slider .prev {
+            left: 0;
+        }
+
+        .slider .next {
+            right: 0;
+        }
+
+        .slider .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .slider .dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .slider .dot.active {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <img src="../static/img/健身.jp" alt="Image 1">
+        <img src="../static/img//游泳.webp" alt="Image 2">
+        <img src="../static/img/羽毛球.webp" alt="Image 3">
+        <img src="../static/img/羽毛球.webp" alt="Image 4">
+        <div class="prev">&#10094;</div>
+        <div class="next">&#10095;</div>
+        <div class="dots">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
+            <div class="dot" data-index="3"></div>
+        </div>
+    </div>
+    <script>
+        var slider = document.querySelector('.slider');
+        var images = slider.querySelectorAll('img');
+        var prevBtn = slider.querySelector('.prev');
+        var nextBtn = slider.querySelector('.next');
+        var dots = slider.querySelectorAll('.dot');
+
+        var currentSlide = 0;
+        var intervalId;
+
+        // 显示当前图片和对应的圆点
+        function showSlide(index) {
+            // 隐藏所有图片
+            for (var i = 0; i < images.length; i++) {
+                images[i].style.display = 'none';
+            }
+            // 显示当前图片
+            images[index].style.display = 'block';
+
+            // 更新圆点状态
+            for (var i = 0; i < dots.length; i++) {
+                if (i === index) {
+                    dots[i].classList.add('active');
+                } else {
+                    dots[i].classList.remove('active');
+                }
+            }
+        }
+
+        // 切换到下一张图片
+        function nextSlide() {
+            currentSlide++;
+            if (currentSlide >= images.length) { currentSlide = 0; } showSlide(currentSlide);
+        }
+        // 切换到上一张图片
+        function prevSlide() {
+            currentSlide--;
+            if (currentSlide < 0) {
+                currentSlide = images.length - 1;
+            }
+            showSlide(currentSlide);
+        }
+
+        // 点击圆点切换图片
+        function clickDot(event) {
+            var dot = event.target;
+            var index = parseInt(dot.dataset.index);
+            currentSlide = index;
+            showSlide(currentSlide);
+        }
+
+        // 开始自动轮播
+        function startSlider() {
+            intervalId = setInterval(nextSlide, 3000);
+        }
+
+        // 停止自动轮播
+        function stopSlider() {
+            clearInterval(intervalId);
+        }
+
+        // 绑定事件
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        for (var i = 0; i < dots.length; i++) {
+            dots[i].addEventListener('click', clickDot);
+        }
+        slider.addEventListener('mouseover', stopSlider);
+        slider.addEventListener('mouseout', startSlider);
+
+        // 初始化
+        showSlide(currentSlide);
+        startSlider();
